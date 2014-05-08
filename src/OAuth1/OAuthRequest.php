@@ -284,11 +284,12 @@ class OAuthRequest
 	{
 		$m     = strtoupper($method);
 		$m     = preg_replace('/[^A-Z0-9]/', '_', $m);
-		$class = '\OAuth1\signature_method\OAuthSignatureMethod_'.$m;
+		$className = "OAuthSignatureMethod_".$m;
+		$class = "\\OAuth1\\signature_method\\" . $className;
 
-		if (file_exists(dirname(__FILE__).'/signature_method/'.$class.'.php'))
+		if (file_exists(dirname(__FILE__).'/signature_method/'.$className.'.php'))
 		{
-			require_once dirname(__FILE__).'/signature_method/'.$class.'.php';
+			require_once dirname(__FILE__).'/signature_method/'.$className.'.php';
 			$sig = new $class();
 		}
 		else
